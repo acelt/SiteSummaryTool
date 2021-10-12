@@ -1,4 +1,4 @@
-  Combine_AIM_LMF_alt <- function(TerrADat_Path, EDIT_List_Path, groups, group_name, Internal, use_EDIT = TRUE){
+  Combine_AIM_LMF <- function(TerrADat_Path, EDIT_List_Path, groups, group_name, Internal, use_EDIT = TRUE){
    
      if(!Internal){
     TerrADat <- sf::st_read(dsn = TerrADat_Path , layer = "TerrADat")

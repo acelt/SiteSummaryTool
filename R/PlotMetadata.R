@@ -1,4 +1,4 @@
-PlotMetadata_alt <- function(dataframe, EcologicalSite){
+PlotMetadata <- function(dataframe, EcologicalSite){
   Plots <- c("Plots")
 
   #Create color palettes 
