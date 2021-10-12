@@ -1,22 +1,21 @@
-PlotMetadata <- function(dataframe){
+PlotMetadata_alt <- function(dataframe, EcologicalSite){
   Plots <- c("Plots")
 
   #Create color palettes 
-  Year_Palette <- scales::seq_gradient_pal("grey85", "grey18", "Lab")(seq(0,1,length.out= length(unique(dataframe$Year)))) 
-  
   Plots_Simple <- dataframe %>% 
-          dplyr::select(PrimaryKey , Year) %>%   
+    filter(EcologicalSiteId == EcologicalSite)%>%
+          dplyr::select(PrimaryKey, Time_Period) %>%   
              dplyr::mutate(PlotsPerYear = Plots) %>%
-                dplyr::arrange(Year)
-  
+                dplyr::arrange(Time_Period)
 
-  PlotsPerYear <- ggplot2::ggplot(Plots_Simple , aes(Plots, text = stat(count))) +
-    geom_bar(stat = "count" , position = position_stack(reverse = TRUE) ,
-             aes(fill = Year) , width = .2 , ) +
-    scale_fill_manual(values = Year_Palette) +
-    ggtitle("Plots Per Year") +
+  PlotsPerYear <- ggplot2::ggplot(Plots_Simple , aes(x= Plots, text = stat(count))) +
+    geom_bar(position = position_stack(reverse = TRUE) ,
+             aes(fill = Time_Period) , width = .2) +
+    scale_fill_brewer(palette = 7, type = "div") +
+    ggtitle(paste("Plots Per Time Period in", EcologicalSite)) +
+    theme_minimal()+
     coord_flip() + theme(axis.text.y = element_blank())
-    PlotsPerYear<- plotly::ggplotly(PlotsPerYear , tooltip = "text")
+
   
   return(PlotsPerYear)
 
