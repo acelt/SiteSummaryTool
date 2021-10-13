@@ -12,10 +12,8 @@ MakeMap <- function(EcologicalSiteId, TDat_LMF, EcoSitePlots){
   EcoSiteList <- unique(TDat_LMF$EcologicalSiteId)
 
   #Set color palettes
-  Pal_EcoSite <- leaflet::colorFactor(palette = 'YlOrRd' , domain = TDat_LMF$es_name)
-  Pal_Date <- leaflet::colorFactor(palette = 'Greys' , domain = TDat_LMF$Year)
+  Pal_Date <- leaflet::colorFactor(palette = colorRamp(c("#000000", "#FFFFFF"), interpolate = "spline") , domain = TDat_LMF$Year)
   Pal_EcoSiteID <- leaflet::colorFactor(palette = "Red" , domain = EcologicalSiteId)
-  EcoSite_All <- TDat_LMF$es_name
   Year <- TDat_LMF$Year
 
   Map <- leaflet::leaflet(height = 650 , width = 650)
@@ -23,18 +21,16 @@ MakeMap <- function(EcologicalSiteId, TDat_LMF, EcoSitePlots){
   #Convert vector to string to use in caption
   EcoSiteCaption <- toString(EcologicalSiteId)
 
-  Map <- leaflet::addTiles(Map) %>% leaflet::addCircleMarkers(lng = ~Longitude_NAD83 , lat = ~Latitude_NAD83 , radius = 3 ,
-                                            popup = paste("Ecological Site: " , TDat_LMF$es_name,
-                                                          "Ecolgical Site Id: " , TDat_LMF$EcologicalSiteId,
+  Map <- leaflet::addTiles(Map) %>% leaflet::addCircleMarkers(lng = ~TDat_LMF$Longitude_NAD83, lat = ~ TDat_LMF$Latitude_NAD83 , radius = 3 ,
+                                            popup = paste("Ecolgical Site Id: " , TDat_LMF$EcologicalSiteId,
                                                           sep = "<br>") ,
                                             color = ~Pal_Date(Year) ,
                                             fillOpacity = .5 , group = Year ,
                                             data = TDat_LMF) %>%
-    leaflet::addCircleMarkers(lng = ~Longitude_NAD83 , lat = ~Latitude_NAD83 ,
+    leaflet::addCircleMarkers(lng = ~TDat_LMF$Longitude_NAD83 , lat = ~TDat_LMF$Latitude_NAD83 ,
                      radius = 3 ,
                      fillOpacity = 0.5 ,
-                     popup = paste("Ecological Site: " ,EcoSitePlots$es_name ,
-                                   "Ecological Site Id: " , EcoSitePlots$EcologicalSiteId ,
+                     popup = paste("Ecological Site Id: " , EcoSitePlots$EcologicalSiteId ,
                                    sep = "<br>") ,
                      color = "red" , group = EcologicalSiteId ,
                      data = EcoSitePlots) %>%

@@ -44,8 +44,8 @@
       LMF_EcoSite$EcologicalSiteId <- LMF_EcoSite$new_es_symbol
     } else {LMF_EcoSite <- LMF}
     
-    #Read in csv of ecological site ids / PKs
-    #Merge LUT with terradat and rename ecosite column
+    # Read in csv of ecological site ids / PKs
+    # Merge LUT with terradat and rename ecosite column
     
     TDat_grouped <- merge(x = TerrADat,
                           y = groups[,c("PrimaryKey", group_name)],
