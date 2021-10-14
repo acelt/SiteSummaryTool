@@ -1,4 +1,4 @@
-SummaryFigures_WithAttributes_alt <- function(SpeciesList, Species_plots_ecosite, EcologicalSite, 
+SummaryFigures_WithAttributes <- function(SpeciesList, Species_plots_ecosite, EcologicalSite, 
                                               SummaryVar, Interactive, Attributed_Pks, EcoSitePlots, alpha = 0.2){
   
   #Prep
@@ -20,7 +20,7 @@ SummaryFigures_WithAttributes_alt <- function(SpeciesList, Species_plots_ecosite
                   PlotID,  AH_SpeciesCover, 
                   AH_SpeciesCover_n, Hgt_Species_Avg, 
                   Hgt_Species_Avg_n, GrowthHabit, GrowthHabitSub, Duration, 
-                  Noxious, SG_Group, link, !!attribute_title, EcologicalSiteId) %>%
+                  Noxious, SG_Group, link, !!Attribute_Field, EcologicalSiteId) %>%
     dplyr::mutate_if(is.numeric, round , digits = 2) 
   
   # Get Noxious versus Non in Standard Format
@@ -52,7 +52,7 @@ SummaryFigures_WithAttributes_alt <- function(SpeciesList, Species_plots_ecosite
   NoxNonPal_Dot <- c("grey33" , "#993300")
   ## Setting color for attribute title
   ## FIgure out how to not hardcode ALLOT_NAME and instead use attribute_title - DONE 
-  Attribute_Fill <- scales::seq_gradient_pal("#009966", "#E69F00", "Lab")(seq(0,1, length.out = length(unique(Species_plots_ecosite_attributed[[attribute_title]]))))
+  Attribute_Fill <- scales::seq_gradient_pal("#009966", "#E69F00", "Lab")(seq(0,1, length.out = length(unique(Species_plots_ecosite_attributed[[Attribute_Field]]))))
   
   #Remove NAs for plotting
   Species_plots_ecosite_attributed <- Species_plots_ecosite_attributed %>% filter(!is.na(AH_SpeciesCover), EcologicalSiteId==EcologicalSite)
@@ -237,9 +237,9 @@ SummaryFigures_WithAttributes_alt <- function(SpeciesList, Species_plots_ecosite
     #FH_RockCover
     
     Ground_Cover_Tall <- EcoSitePlots_Attributed %>% 
-      dplyr::select(PlotID, PrimaryKey, BareSoilCover , 
+      dplyr::select(PrimaryKey, BareSoilCover , 
                     TotalFoliarCover , FH_TotalLitterCover , 
-                    FH_RockCover, !!attribute_title) %>%
+                    FH_RockCover, !!Attribute_Field) %>%
       gather(key = Indicator , value = Percent, 
              BareSoilCover:FH_RockCover) %>% mutate(Tally = 1) 
     if(Interactive){
