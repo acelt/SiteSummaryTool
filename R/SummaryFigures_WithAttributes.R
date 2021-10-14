@@ -100,7 +100,7 @@ SummaryFigures_WithAttributes <- function(SpeciesList, Species_plots_ecosite, Ec
       Plots <- lapply(X = split(Species_plots_ecosite_attributed, Species_plots_ecosite_attributed[["GrowthHabitSub"]] , drop = TRUE), 
                       FUN = function(Species_plots_ecosite_attributed){
                         
-                        current_plot <- ggplot2::ggplot(Species_plots_ecosite_attributed[Species_plots_ecosite_attributed$EcologicalSiteId == EcologicalSite,], aes(x = GrowthHabitSub , y = AH_SpeciesCover )) +
+                        current_plot <- ggplot2::ggplot(Species_plots_ecosite_attributed[Species_plots_ecosite_attributed$EcologicalSiteId == EcologicalSite,], aes(x = GrowthHabitSub , y = AH_SpeciesCover, fill = Noxious)) +
                           geom_boxplot(width = .6 , outlier.shape = NA, position = dodge1) +
                           geom_point(size = 2, aes(shape = Noxious), position = dodge1) +
                           labs(y = "Percent Cover") + # remove ylims

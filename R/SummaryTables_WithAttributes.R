@@ -58,7 +58,7 @@ TraceCover_Table_SpList <- TraceSpeciesCover %>%
                 dplyr::select(Species, ScientificName , Family , GrowthHabit ,
                 GrowthHabitSub , Duration, Noxious , SG_Group ,
                 SynonymOf , CommonName ,
-                UpdatedSpeciesCode, link, ALLOT_NAME, ALLOT_NO) %>% unique() %>% filter(!is.na(Species))
+                UpdatedSpeciesCode, link) %>% unique() %>% filter(!is.na(Species))
 
 if(SummaryVar == "Species" & SummarizeBy == "Plot"){
   #hyperlink species
@@ -71,7 +71,7 @@ if(SummaryVar == "Species" & SummarizeBy == "Plot"){
                             buttons =
                             list(list(extend = 'collection', buttons = c('csv', 'excel'),
                             text = 'Download Table'))) , 
-                  caption = (paste("Percent Cover by Species by Plot within " , toString(EcologicalSiteId))) , 
+                  caption = (paste("Percent Cover by Species by Plot within " , toString(EcologicalSite))) , 
                   rownames = FALSE)
 }
 
@@ -106,7 +106,7 @@ if(SummaryVar == "Species" & SummarizeBy == "EcologicalSite"){
                                                             extend = 'collection',
                                                             buttons = c('csv', 'excel'),
                                                             text = 'Download Table'))) , 
-                                                            caption = (paste("Average Percent Cover Values Across" , toString(EcologicalSiteId))) , 
+                                                            caption = (paste("Average Percent Cover Values Across" , toString(EcologicalSite))) , 
                                                             rownames = FALSE)
 }
 
@@ -128,7 +128,7 @@ if(SummaryVar== "GrowthHabitSub" & SummarizeBy == "Plot"){
                                buttons = c('csv', 'excel'),
                                text = 'Download Table'))) ,
                   caption = (paste("Percent Cover by Structure and Functional Group by Plot  within " , 
-                                   toString(EcologicalSiteId))), 
+                                   toString(EcologicalSite))), 
                   rownames = FALSE)
 }
 
@@ -153,14 +153,14 @@ if(SummaryVar == "GrowthHabitSub" & SummarizeBy == "EcologicalSite"){
                             buttons = c('csv', 'excel'),
                             text = 'Download Table'))) ,
                   caption = (paste("Percent Cover by Structure and Functional Group in " , 
-                                   toString(EcologicalSiteId))), 
+                                   toString(EcologicalSite))), 
                   rownames = FALSE)
     
 }
 
 if(SummaryVar== "Noxious" & SummarizeBy == "Plot"){
   
-  table <- EcoSitePlots_Attributed %>% dplyr::select(PlotID, PrimaryKey, AH_NoxCover, AH_NonNoxCover, ALLOT_NAME, ALLOT_NO) %>%
+  table <- EcoSitePlots_Attributed %>% dplyr::select(PlotID, PrimaryKey, AH_NoxCover, AH_NonNoxCover) %>%
                    filter(!is.na(AH_NonNoxCover)) %>%
                    rename(NonNoxious = AH_NonNoxCover, Noxious = AH_NoxCover) %>%
                    dplyr::mutate_if(is.numeric, round , digits = 2) %>% 
@@ -173,7 +173,7 @@ if(SummaryVar== "Noxious" & SummarizeBy == "Plot"){
                                  buttons = c('csv', 'excel'),
                                  text = 'Download Table'))) , 
                                  caption = (paste("Percent Cover Noxious Versus Non by Plot within " , 
-                                                  toString(EcologicalSiteId))) , 
+                                                  toString(EcologicalSite))) , 
                                  rownames = FALSE)
 }
 
@@ -204,7 +204,7 @@ if(SummaryVar== "Noxious" & SummarizeBy == "EcologicalSite"){
                              buttons = c('csv', 'excel'),
                              text = 'Download Table'))) , 
                    caption = (paste("Percent Cover Noxious Versus Non in " , 
-                                    toString(EcologicalSiteId))) , 
+                                    toString(EcologicalSite))) , 
                    rownames = FALSE)
   
 }
@@ -223,7 +223,7 @@ if(SummaryVar == "Woody" & SummarizeBy == "Plot"){
                                 extend = 'collection',
                                 buttons = c('csv', 'excel'),
                                 text = 'Download Table'))) , 
-                      caption = (paste("Percent Cover Woody vs. Non by Plot within: " , toString(EcologicalSiteId))) , 
+                      caption = (paste("Percent Cover Woody vs. Non by Plot within: " , toString(EcologicalSite))) , 
                       rownames = FALSE)
   
 }
@@ -250,7 +250,7 @@ if(SummaryVar == "Woody" & SummarizeBy == "EcologicalSite"){
                             buttons = c('csv', 'excel'),
                             text = 'Download Table'))) , 
                             caption = (paste("Percent Cover Woody vs. Non in: " , 
-                                             toString(EcologicalSiteId))) , 
+                                             toString(EcologicalSite))) , 
                                        rownames = FALSE)
     
 }
@@ -271,7 +271,7 @@ if(SummaryVar == "SageGrouseGroup" & SummarizeBy == "Plot"){
                               buttons = c('csv', 'excel'),
                               text = 'Download Table'))) , 
                   caption = (paste("Percent Cover by Sage-Grouse Group by Plot within: " , 
-                                   toString(EcologicalSiteId))), 
+                                   toString(EcologicalSite))), 
                   rownames = FALSE)
 }
 
@@ -295,7 +295,7 @@ if(SummaryVar == "SageGrouseGroup" & SummarizeBy == "EcologicalSite"){
                             buttons = c('csv', 'excel'),
                             text = 'Download Table'))) ,
                  caption = (paste("Percent Cover by Sage-Grouse Group in " , 
-                                  toString(EcologicalSiteId))) , 
+                                  toString(EcologicalSite))) , 
                  rownames = FALSE)
   
 }
@@ -319,7 +319,7 @@ if(SummaryVar == "PreferredForb" & SummarizeBy == "Plot"){
                           buttons = c('csv', 'excel'),
                           text = 'Download Table'))) , 
                   caption = (paste("Percent Cover by Preferred Forb By Plot within " , 
-                                   toString(EcologicalSiteId))) , 
+                                   toString(EcologicalSite))) , 
                   rownames = FALSE)
   
   
@@ -349,7 +349,7 @@ if(SummaryVar == "PreferredForb" & SummarizeBy == "EcologicalSite"){
                         buttons = c('csv', 'excel'),
                         text = 'Download Table'))) , 
                         caption = (paste("Percent Cover by Preferred Forb in " , 
-                                         toString(EcologicalSiteId))) , 
+                                         toString(EcologicalSite))) , 
                         rownames = FALSE)
   
 }
@@ -359,7 +359,7 @@ if(SummaryVar == "TraceSpecies" & SummarizeBy == "Plot"){
           RichnessPresent <-  RichnessPresent %>% 
           dplyr::select(Species, ScientificName , GrowthHabit ,
           GrowthHabitSub , Duration, Noxious , SG_Group, 
-          PrimaryKey, PlotID, link, ALLOT_NAME, ALLOT_NO) %>% filter(!is.na(Species))
+          PrimaryKey, PlotID, link) %>% filter(!is.na(Species))
 
           RichnessPresent$Species <- paste0("<a href='",RichnessPresent$link,"'>", RichnessPresent$Species,"</a>")
   
@@ -373,7 +373,7 @@ if(SummaryVar == "TraceSpecies" & SummarizeBy == "Plot"){
                          buttons = c('csv', 'excel'),
                          text = 'Download Table'))) , 
                          caption = (paste("Trace Species by Plot within " , 
-                                         toString(EcologicalSiteId))) , 
+                                         toString(EcologicalSite))) , 
                          rownames = FALSE)
   
 }
@@ -396,7 +396,7 @@ if(SummaryVar == "TraceSpecies" & SummarizeBy == "EcologicalSite"){
                                             buttons = c('csv', 'excel'),
                                             text = 'Download Table'))) , 
                                             caption = (paste("Trace species in " , 
-                                                       toString(EcologicalSiteId))) , 
+                                                       toString(EcologicalSite))) , 
                                                        rownames = FALSE)
   
    
@@ -406,7 +406,7 @@ if(SummaryVar == "GroundCover" & SummarizeBy == "Plot"){
 
             table <- EcoSitePlots_Attributed %>% dplyr::select(PlotID, PrimaryKey, BareSoilCover , 
                      TotalFoliarCover , FH_TotalLitterCover , 
-                     FH_RockCover, ALLOT_NAME, ALLOT_NO) %>% 
+                     FH_RockCover) %>% 
                      gather(key = Indicator , value = Percent, 
                      BareSoilCover:FH_RockCover) %>%
                      filter(!is.na(Percent)) %>% mutate(Tally = 1) %>% 
@@ -422,7 +422,7 @@ if(SummaryVar == "GroundCover" & SummarizeBy == "Plot"){
                                    buttons = c('csv', 'excel'),
                                    text = 'Download Table'))) , 
                                    caption = (paste("Percent cover by plot within " , 
-                                                    toString(EcologicalSiteId))) , 
+                                                    toString(EcologicalSite))) , 
                                              rownames = FALSE)
 }
 
@@ -449,7 +449,7 @@ if(SummaryVar == "GroundCover" & SummarizeBy == "EcologicalSite"){
                                buttons = c('csv', 'excel'),
                                text = 'Download Table'))) , 
                         caption = (paste("Average percent cover in " , 
-                                         toString(EcologicalSiteId))) , 
+                                         toString(EcologicalSite))) , 
                         rownames = FALSE)
 }
 
@@ -458,7 +458,7 @@ if(SummaryVar == "Gap" & SummarizeBy == "Plot"){
   table  <- EcoSitePlots_Attributed %>% dplyr::select(PlotID , PrimaryKey , 
                              GapCover_25_50 , GapCover_51_100 , 
                              GapCover_101_200 , GapCover_200_plus , 
-                             GapCover_25_plus, ALLOT_NAME, ALLOT_NO) %>% 
+                             GapCover_25_plus) %>% 
                              gather(key = Gap_Class_cm , 
                              value = Percent , GapCover_25_50:GapCover_25_plus) %>%
                              filter(!is.na(Percent)) %>% 
@@ -475,7 +475,7 @@ if(SummaryVar == "Gap" & SummarizeBy == "Plot"){
                                            buttons = c('csv', 'excel'),
                                            text = 'Download Table'))) , 
                                            caption = (paste("Percent cover by canopy gap class by plot within " , 
-                                                           toString(EcologicalSiteId))) , 
+                                                           toString(EcologicalSite))) , 
                                            rownames = FALSE)
 }
 
@@ -504,7 +504,7 @@ if(SummaryVar == "Gap" & SummarizeBy == "EcologicalSite"){
                                           buttons = c('csv', 'excel'),
                                           text = 'Download Table'))) , 
                             caption = (paste("Percent cover by canopy gap class in: " , 
-                                             toString(EcologicalSiteId))) , 
+                                             toString(EcologicalSite))) , 
                                       rownames = FALSE)
   
 }
@@ -514,7 +514,7 @@ if(SummaryVar == "SoilStability" & SummarizeBy == "Plot"){
         table <-  EcoSitePlots_Attributed %>% dplyr::select(PlotID , PrimaryKey , 
                                    SoilStability_All , 
                                    SoilStability_Protected , 
-                                   SoilStability_Unprotected, ALLOT_NAME, ALLOT_NO) %>%
+                                   SoilStability_Unprotected) %>%
                   gather(key = Veg , value = Rating , 
                   SoilStability_All:SoilStability_Unprotected) %>%
                   filter(!is.na(Rating)) %>% 
@@ -531,7 +531,7 @@ if(SummaryVar == "SoilStability" & SummarizeBy == "Plot"){
                                 buttons = c('csv', 'excel'),
                                 text = 'Download Table'))) , 
                         caption = (paste("Soil stability ratings by plot in: " , 
-                                         toString(EcologicalSiteId))) , 
+                                         toString(EcologicalSite))) , 
                                 rownames = FALSE)
 
 }
@@ -561,7 +561,7 @@ if(SummaryVar == "SoilStability" & SummarizeBy == "EcologicalSite"){
                                     buttons = c('csv', 'excel'),
                                     text = 'Download Table'))) , 
                            caption = (paste("Average soil stability ratings in: " , 
-                                            toString(EcologicalSiteId))) , 
+                                            toString(EcologicalSite))) , 
                            rownames = FALSE)
 
 }
