@@ -1,19 +1,17 @@
-PlotMetadata <- function(dataframe, EcologicalSite){
+PlotMetadata <- function(dataframe){
   Plots <- c("Plots")
 
   #Create color palettes 
   Plots_Simple <- dataframe %>% 
-    filter(EcologicalSiteId == EcologicalSite)%>%
-          dplyr::select(PrimaryKey) %>%   
+          dplyr::select(PrimaryKey, EcologicalSiteId) %>%   
              dplyr::mutate(PlotsPerYear = Plots)
 
-  PlotsPerYear <- ggplot2::ggplot(Plots_Simple , aes(x= Plots, text = stat(count))) +
+  PlotsPerYear <- ggplot2::ggplot(Plots_Simple , aes(x= Plots, text = stat(count), fill = EcologicalSiteId)) +
     geom_bar(position = position_stack(reverse = TRUE), width = .2) +
     scale_fill_brewer(palette = 7, type = "div") +
-    ggtitle(paste("Plots Per Time Period in", EcologicalSite)) +
+    ggtitle("Plots Per Ecoregion") +
     theme_minimal()+
     coord_flip() + theme(axis.text.y = element_blank())
-
   
   return(PlotsPerYear)
 
