@@ -101,8 +101,7 @@ SummaryFigures_WithAttributes <- function(SpeciesList, Species_plots_ecosite, Ec
                       FUN = function(Species_plots_ecosite_attributed){
                         
                         current_plot <- ggplot2::ggplot(Species_plots_ecosite_attributed[Species_plots_ecosite_attributed$EcologicalSiteId == EcologicalSite,], aes(x = GrowthHabitSub , y = AH_SpeciesCover, fill = Noxious)) +
-                          geom_boxplot(width = .6 , outlier.shape = NA, position = dodge1) +
-                          geom_point(size = 2, aes(shape = Noxious), position = dodge1) +
+                          geom_boxplot(width = .6 , position = dodge1) +
                           labs(y = "Percent Cover") + # remove ylims
                           theme_light() + 
                           theme(axis.text.y = element_blank() , axis.ticks.y = element_blank() ,
@@ -154,8 +153,7 @@ SummaryFigures_WithAttributes <- function(SpeciesList, Species_plots_ecosite, Ec
       Plots <- Species_plots_ecosite_attributed %>% group_by(Noxious) %>% 
         filter(!is.na(Noxious)) %>% filter(!is.na(AH_SpeciesCover)) %>%
         ggplot2::ggplot((aes(x = Noxious , y = AH_SpeciesCover))) +
-        geom_boxplot(width = .6 , outlier.shape = NA, position = dodge1) +
-        geom_point(size = 2 , aes(shape = Noxious), position = dodge1) +
+        geom_boxplot(width = .6 , position = dodge1) +
         theme_light() +
         scale_y_continuous(limits = c(0 , 100)) +
         labs(y = "Percent Cover") + 
@@ -211,8 +209,7 @@ SummaryFigures_WithAttributes <- function(SpeciesList, Species_plots_ecosite, Ec
                                 drop = TRUE),
                       FUN = function(PercentCover){
                         current_plot <- ggplot2::ggplot(PercentCover , aes(x = Species , y = AH_SpeciesCover)) +
-                          geom_boxplot(width = .6 , outlier.shape = NA, position = dodge1) +
-                          geom_point(size = 1 , aes(shape = Noxious), position = dodge1) +
+                          geom_boxplot(width = .6 , position = dodge1) +
                           theme_light() +
                           labs(y = "Percent Cover") + 
                           ggtitle(paste("Percent Cover by Species, " , 
@@ -270,8 +267,7 @@ SummaryFigures_WithAttributes <- function(SpeciesList, Species_plots_ecosite, Ec
     if(!Interactive){
       Plots <- Ground_Cover_Tall %>% mutate_if(is.numeric , round , digits = 2) %>% 
         ggplot2::ggplot((aes(x = Indicator , y = Percent))) +
-        geom_boxplot(width = .6 , outlier.shape = NA, position = dodge1) +
-        geom_point(position = dodge1) +
+        geom_boxplot(width = .6 , position = dodge1) +
         theme_light(base_size = 16) +
         scale_color_manual(values = Attribute_Fill, na.value="#000000") +
         scale_y_continuous(limits = c(0 , 100)) +
@@ -327,8 +323,7 @@ SummaryFigures_WithAttributes <- function(SpeciesList, Species_plots_ecosite, Ec
              caption = paste("Percent cover of canopy gap in: ", 
                              EcologicalSite, sep = " ")) +
         geom_boxplot(position = dodge1) + 
-        coord_flip() + 
-        geom_point(position = dodge1) +
+        coord_flip() +
         theme_light(base_size = 16) + 
         scale_color_manual(values = Attribute_Fill, na.value="#000000") + 
         theme(axis.text.y = element_blank() , 
@@ -384,7 +379,6 @@ SummaryFigures_WithAttributes <- function(SpeciesList, Species_plots_ecosite, Ec
                              EcologicalSite)) +
   geom_boxplot(position = dodge1) +
   coord_flip() + 
-  geom_point(position = dodge1) +
   theme_light(base_size = 16) +
   scale_color_manual(values = Attribute_Fill, na.value="#000000") +
   theme(axis.text.y = element_blank(),
