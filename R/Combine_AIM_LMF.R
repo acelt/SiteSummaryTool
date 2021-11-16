@@ -1,4 +1,4 @@
-  Combine_AIM_LMF <- function(TerrADat_Path, EDIT_List_Path, groups, group_name, Internal, use_EDIT = TRUE){
+  Combine_AIM_LMF <- function(TerrADat_Path, EDIT_List_Path, Internal, use_EDIT = TRUE){
    
      if(!Internal){
     TerrADat <- sf::st_read(dsn = TerrADat_Path , layer = "TerrADat")
@@ -47,13 +47,18 @@
     # Read in csv of ecological site ids / PKs
     # Merge LUT with terradat and rename ecosite column
     
-    TDat_grouped <- merge(x = TerrADat,
-                          y = groups[,c("PrimaryKey", group_name)],
-                          by = "PrimaryKey",
-                          all.x = TRUE)
+    if(Groups){
+      TDat_grouped <- merge(x = TerrADat,
+                            y = groups[,c("PrimaryKey", group_name)],
+                            by = "PrimaryKey",
+                            all.x = TRUE)
+      
+      TDat_grouped$EcologicalSiteId <- TDat_grouped[[group_name]]
+    }
     
-    TDat_grouped$EcologicalSiteId <- TDat_grouped[[group_name]]
-    
+    if(!Groups){
+      TDat_grouped <- TerrADat
+    }
     # Characterize to prevent rbind factor issues
     TDat_grouped$EcologicalSiteId <- as.character(TDat_grouped$EcologicalSiteId)
     LMF_EcoSite$EcologicalSiteId <- as.character(LMF_EcoSite$EcologicalSiteId)
