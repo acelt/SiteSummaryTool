@@ -2,7 +2,7 @@
 title: "Ecological Site Summaries for External Data Users"
 subtitle: "Using Assessment, Inventory, and Monitoring Data"
 author: "A Reporting Tool by USDA-ARS Jornada" 
-date: " "
+date: ""
 output:
   html_document:
     theme: cosmo
@@ -66,62 +66,10 @@ Read this document alongside the RMarkdown script.
 
 Download the TerrADat geodatabase from the external users sharepoint into **the same folder as this repository**. This is necessary for the file paths in this script to work properly. Make sure you have **TerrADat**, **TerrADatSpeciesIndicators**, **LMF**, **LMFSpeciesIndicators**, and **tblStateSpecies** in the geodatabase. Make sure the geodatabase is named **TerrADat**. 
 
-##### Set your ecological site
-
-To generate these reports, you need to specify your ecological site(s) of interest. You can specify a single ecological site that is restricted by state lines or create a list of multiple ecological sites that can span political boundaries. 
-Give the object "EcologicalSiteId" as Ecological Site Id in the section below:
-
-```{r set EcologicalSiteId, echo = TRUE, include = TRUE}
-
-# Set your defaults in this section here. 
-
-#Define your ecological site(s) of interest below (full ecological site id)
-#You can list as many as you want, or just 1. 
-library(SiteSummaryTool)
-EcologicalSiteId <- EcologicalSiteId
-
-#Set the path to TerrADat (this will be NULL if working within BLM network)
-#If working within BLM network, TerrADat_Path = NULL (this tool will direct to AIMPub)
-#BLM <- TRUE if internal (on VPN). BLM <- FALSE if external
-#EDIT_List_Path <- path to this repository
-TerrADat_Path <- TerrADat_Path
-EDIT_List_Path <- EDIT_List_Path
-#Set the path to your R library (make sure it's on local folder not network drive)
-LibraryPath <- LibraryPath
-BLM <- BLM
-State <- State
-
-```
-
 ##### Run the report!
 
 The rest of the report is automated and requires no edits. 
 Click the Knit button at the top of your RStudio session and knit to an HTML. The output HTML document will be saved in the repository folder. View the document in Google Chrome or Firefox (*some features will be disabled in Internet Explorer*). You need to be connected to the internet to run the report, but you can view it without internet (*note that the basemap feature will be disabled offline*).
-
-
-``` {r ESS Demo, echo = FALSE, include = FALSE}
-#Load required packages
-InstallPackages(LibraryPath = LibraryPath)
-
-```
-
-
-```{r load data, echo = FALSE, include = FALSE}
-##The state species list table should also live in this geodatabase
- 
-TDat_LMF <- Combine_AIM_LMF(TerrADat_Path = TerrADat_Path, 
-                            EDIT_List_Path = EDIT_List_Path, Internal = BLM)
-
-EcoSitePlots <- SubsetEcologicalSite(TDat_LMF, EcologicalSiteId)
-
-Species_Indicator <- Combine_AIM_LMF_Species(TerrADat_Path = TerrADat_Path, 
-                                             Internal = BLM)
-
-Species_plots_ecosite <- SubsetEcologicalSite_Species(EcoSitePlots, Species_Indicator)
-
-SpeciesList <- ReadSpeciesList(TerrADat_Path = TerrADat_Path, Internal = BLM)
-
-```
 
 # 2. Interpreting report figures {.tabset .tabset-fade .tabset-pills}
 
