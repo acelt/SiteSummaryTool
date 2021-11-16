@@ -51,7 +51,7 @@
       TDat_grouped <- merge(x = TerrADat,
                             y = groups[,c("PrimaryKey", group_name)],
                             by = "PrimaryKey",
-                            all.x = TRUE)
+                            all.x = FALSE)
       
       TDat_grouped$EcologicalSiteId <- TDat_grouped[[group_name]]
     }

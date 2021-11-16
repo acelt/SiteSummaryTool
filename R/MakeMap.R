@@ -23,7 +23,7 @@ MakeMap <- function(EcologicalSiteId, TDat_LMF){
   #Convert vector to string to use in caption
   EcoSiteCaption <- toString(EcologicalSiteId)
   
-  if(Groups) {
+  if(IncludeShapefile) {
     # Reading in Group polygon
     projection <- sf::st_crs("+proj=longlat +datum=NAD83")
     poly <- sf::st_read(dsn = Shapefile_Path, layer = Shapefile_Name)
@@ -32,9 +32,14 @@ MakeMap <- function(EcologicalSiteId, TDat_LMF){
     
     # Select only the features of interest
     if(!is.na(Attribute_Name)){
-      poly <- poly[poly[[Attribute_Field]]== Attribute_Name,]
+      poly <- poly[poly[[Attribute_Field]] == Attribute_Name,]
     }
     
+    if(is.na(Attribute_Name)){
+      poly <- poly[!is.na(poly[[Attribute_Field]])]
+    }
+    
+  
     # Making Map with polygon
     Map <- leaflet::addTiles(Map) %>% leaflet::addCircleMarkers(lng = ~Longitude_NAD83 , lat = ~Latitude_NAD83 ,
                                                                 radius = 3 ,

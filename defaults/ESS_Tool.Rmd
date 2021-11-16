@@ -92,7 +92,7 @@ Plots in our ecological site of interest are highlighted in red. \
 
 ```{r map , echo = FALSE , include = TRUE}
 
-MakeMap(EcologicalSiteId, TDat_LMF, EcoSitePlots)
+MakeMap(EcologicalSiteId = group_name, TDat_LMF)
                                          
 ```
 
