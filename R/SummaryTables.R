@@ -52,7 +52,7 @@ if(SummaryVar == "Species" & SummarizeBy == "Plot"){
   #hyperlink species
   Species_plots_ecosite$Species <- paste0("<a href='",Species_plots_ecosite$link,"'>",Species_plots_ecosite$Species,"</a>")
   
-  table <- Species_plots_ecosite %>% select(-link) %>% 
+  table <- Species_plots_ecosite %>% dplyr::select(-link) %>% 
            DT::datatable(escape = FALSE, extensions = 'Buttons', filter = "top" , 
                   options = list(scrollX = TRUE ,
                             dom = 'Bfrtip',
@@ -84,7 +84,7 @@ if(SummaryVar == "Species" & SummarizeBy == "EcologicalSite"){
   #hyperlink species
   Species_cover_summary$Species <- paste0("<a href='",Species_cover_summary$link,"'>", Species_cover_summary$Species,"</a>")
   
-  table <- Species_cover_summary %>% select(-link) %>% DT::datatable(escape = FALSE, 
+  table <- Species_cover_summary %>% dplyr::select(-link) %>% DT::datatable(escape = FALSE, 
                                                             extensions = 'Buttons', 
                                                             filter = "top" , 
                                                             options = list(scrollX = TRUE ,
@@ -129,7 +129,7 @@ if(SummaryVar == "GrowthHabitSub" & SummarizeBy == "EcologicalSite"){
               MinCover = min(AH_SpeciesCover) ,
               MaxCover = max(AH_SpeciesCover) , n = sum(Tally)) %>%
               mutate_if(is.numeric, round , digits = 2) %>%
-              select(-Tally) %>%
+              dplyr::select(-Tally) %>%
               filter(!is.na(GrowthHabitSub)) %>%
               DT::datatable(extensions = 'Buttons', filter = "top" ,  
                             options = list(scrollX = TRUE ,
@@ -348,7 +348,7 @@ if(SummaryVar == "TraceSpecies" & SummarizeBy == "Plot"){
 
           RichnessPresent$Species <- paste0("<a href='",RichnessPresent$link,"'>", RichnessPresent$Species,"</a>")
   
-          table <- RichnessPresent %>% select(-link) %>%  
+          table <- RichnessPresent %>% dplyr::select(-link) %>%  
                    DT::datatable(escape = FALSE, extensions = 'Buttons', 
                          filter = "top" , options = list(scrollX = TRUE ,
                          dom = 'Bfrtip',
@@ -369,7 +369,7 @@ if(SummaryVar == "TraceSpecies" & SummarizeBy == "EcologicalSite"){
   TraceCover_Table_SpList$Species <- paste0("<a href='",TraceCover_Table_SpList$link,"'>", TraceCover_Table_SpList$Species,"</a>")
  
    table <- TraceCover_Table_SpList %>% arrange(Species) %>% 
-                              select(-link) %>% 
+                              dplyr::select(-link) %>% 
                               DT::datatable(escape = FALSE, 
                                             extensions = 'Buttons', 
                                             filter = "top" , 
@@ -395,7 +395,7 @@ if(SummaryVar == "GroundCover" & SummarizeBy == "Plot"){
                      gather(key = Indicator , value = Percent, 
                      BareSoilCover:FH_RockCover) %>% mutate(Tally = 1) %>% 
                      group_by(PlotID, PrimaryKey, Indicator) %>% 
-                     mutate_if(is.numeric, round , digits = 2) %>% select(-Tally) %>% 
+                     mutate_if(is.numeric, round , digits = 2) %>% dplyr::select(-Tally) %>% 
                      rename(PercentCover = Percent) %>%
                      DT::datatable(extensions = 'Buttons', filter = "top" , 
                                    options = list(scrollX = TRUE ,
