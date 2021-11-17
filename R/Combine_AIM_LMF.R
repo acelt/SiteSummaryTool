@@ -51,7 +51,7 @@
       TDat_grouped <- merge(x = TerrADat,
                             y = groups[,c("PrimaryKey", group_name)],
                             by = "PrimaryKey",
-                            all.x = FALSE)
+                            all.x = TRUE)
       
       TDat_grouped$EcologicalSiteId <- TDat_grouped[[group_name]]
     }
@@ -59,6 +59,7 @@
     if(!Groups){
       TDat_grouped <- TerrADat
     }
+    
     # Characterize to prevent rbind factor issues
     TDat_grouped$EcologicalSiteId <- as.character(TDat_grouped$EcologicalSiteId)
     LMF_EcoSite$EcologicalSiteId <- as.character(LMF_EcoSite$EcologicalSiteId)
@@ -85,6 +86,10 @@
     TDat_LMF$DateVisited <- sub("^(\\d{4}).*$", "\\1", TDat_LMF$DateVisited)
     TDat_LMF <- TDat_LMF %>% dplyr::rename(Year = DateVisited)
     
+    # filter down to list of plots from look up table if grouping
+    if(Groups){
+      TDat_LMF <- TDat_LMF[TDat_LMF$PrimaryKey %in% groups$PrimaryKey,]
+    }
     
     return(TDat_LMF)
     
