@@ -50,10 +50,10 @@ MakeMap <- function(EcologicalSiteId, TDat_LMF){
                                                                 data = TDat_LMF) %>%
       leaflet::addLayersControl(overlayGroups = TDat_LMF$EcologicalSiteId,
                                 options = leaflet::layersControlOptions(collapsed = TRUE)) %>%
-      #leaflet::addLegend(pal = Pal_EcoSite , values = TDat_LMF$EcologicalSiteId , opacity = 1 , group = TDat_LMF$EcologicalSiteId) %>% # removing legend for now since it take sup mostof the page when used with ecoregions
+      leaflet::addLegend(pal = Pal_EcoSite , values = TDat_LMF$EcologicalSiteId , opacity = 1 , group = TDat_LMF$EcologicalSiteId) %>% # removing legend for now since it take sup mostof the page when used with ecoregions
       addPolygons(data = poly, fillColor = "transparent",
                   color = "black",
-                  weight = 1)
+                  weight = 2)
     
     return(Map)
     

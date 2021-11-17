@@ -138,7 +138,9 @@ for(i in EcologicalSiteIds){
 
 ```{r SFG plots forb static, fig.height = 5 , fig.width = 10 , echo = FALSE, include = TRUE, message=FALSE, results="asis"}
 
-for(i in EcologicalSiteIds){
+EcologicalSiteIds_Forbs <- EcologicalSiteIds[1:5] # hard coding this for now, one ecosite doesn have forbs, need to add check for this
+
+for(i in EcologicalSiteIds_Forbs){
   cat("  \n#####", i, "\n")
   #print(FigureList_stat[[i]][["GrowthHabitSub"]][["Forb"]])
   plot(FigureList_stat[[i]][["GrowthHabitSub"]][["Forb"]])
@@ -183,7 +185,7 @@ for(i in EcologicalSiteIds_AG){
 #####
 ```{r species plots grass perennial static, fig.height = 14 , fig.width = 10 , echo = FALSE, include = TRUE , results = 'asis', message=FALSE}
 
-for(i in EcologicalSiteIds){
+for(i in EcologicalSiteIds_Forbs){
   cat("  \n#####", i, "  \n")
   #print(FigureList_stat[[i]][["Species"]][["Graminoid.Perennial"]])
   plot(FigureList_stat[[i]][["Species"]][["Graminoid.Perennial"]])
@@ -196,9 +198,8 @@ for(i in EcologicalSiteIds){
 #####
 ```{r species plots forb annual static , fig.height = 14 , fig.width = 10 , echo = FALSE, include = TRUE , results = 'asis', message=FALSE}
 
-EcologicalSiteIds_AF <- subset(EcologicalSiteIds, EcologicalSiteIds != "Dry Exposure" & EcologicalSiteIds != "Loamy Slopes" & EcologicalSiteIds != "Brushy Loam")
 
-for(i in EcologicalSiteIds_AF){
+for(i in EcologicalSiteIds_Forbs){
   cat("  \n#####", i, "  \n")
   #print(FigureList_stat[[i]][["Species"]][["Forb.Annual"]])
   plot(FigureList_stat[[i]][["Species"]][["Forb.Annual"]])
@@ -211,9 +212,8 @@ for(i in EcologicalSiteIds_AF){
 #####
 ```{r species plots forb perennial static, fig.height = 14 , fig.width = 10 , echo = FALSE, include = TRUE , results = 'asis', message=FALSE}
 
-EcologicalSiteIds_PF <- EcologicalSiteIds[EcologicalSiteIds!="R034BY297CO"]
 
-for(i in EcologicalSiteIds_PF){
+for(i in EcologicalSiteIds_Forbs){
   cat("  \n#####", i, "  \n")
   #print(FigureList_stat[[i]][["Species"]][["Forb.Perennial"]])
   plot(FigureList_stat[[i]][["Species"]][["Forb.Perennial"]])
