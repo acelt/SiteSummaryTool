@@ -71,7 +71,7 @@ MakeMap(EcologicalSiteId = EcologicalSiteId, TDat_LMF)
 ```{r metadata plot list, echo = FALSE,}
 md_plotlist <- list()
 
-EcologicalSiteIds <- unique(TDat_LMF_Attributed$EcologicalSiteId)
+EcologicalSiteIds <- unique(TDat_LMF$EcologicalSiteId)
 
 for(i in EcologicalSiteIds){
   md_plotlist[[i]] <- PlotMetadata(dataframe = EcoSitePlots, EcologicalSite = i)
@@ -128,7 +128,7 @@ for(i in EcologicalSiteIds){
                                                        SummaryVar = j, 
                                                        Interactive = FALSE,
                                                        Attributed_Pks = Attributed_Pks,
-                                                       EcoSitePlots = TDat_LMF_Attributed)
+                                                       EcoSitePlots = TDat_LMF)
   }
 }
 ```
@@ -249,7 +249,7 @@ for(i in EcologicalSiteIds){
                                                        EcologicalSite = i,  
                                                        SummaryVar = j, 
                                                        Interactive = TRUE,
-                                                       TDat_LMF_Attributed = TDat_LMF_Attributed,
+                                                       TDat_LMF = TDat_LMF,
                                                        alpha = alpha)
   }
 }
@@ -267,7 +267,7 @@ for(i in EcologicalSiteIds){
                                                        EcologicalSite = i,  
                                                        SummaryVar = j, 
                                                        Interactive = FALSE,
-                                                       TDat_LMF_Attributed = TDat_LMF_Attributed,
+                                                       TDat_LMF = TDat_LMF,
                                                        alpha = alpha)
   }
 }
@@ -443,7 +443,7 @@ Foliar cover values are summarized in tables below. Tables summarize data across
 Percent cover by species by plot within your study area. 
 
 ```{r plots, echo = FALSE , results = 'asis' , fig.height = 8}
-SummaryTables_WithAttributes(EcoSitePlots = TDat_LMF_Attributed,
+SummaryTables_WithAttributes(EcoSitePlots = TDat_LMF,
                              Species_plots_ecosite = Species_plots_ecosite,
                              SummaryVar = "Species",
                              SummarizeBy = "Plot",
@@ -456,7 +456,7 @@ Percent cover by species averaged across the study area by ecological site.
 
 ```{r species, echo = FALSE , resutls = 'asis' , fig.height = 8}
 
-SummaryTables_WithAttributes(EcoSitePlots = TDat_LMF_Attributed, Species_plots_ecosite, SummaryVar = "Species", 
+SummaryTables_WithAttributes(EcoSitePlots = TDat_LMF, Species_plots_ecosite, SummaryVar = "Species", 
               SummarizeBy = "EcologicalSite", Attributed_Pks = Attributed_Pks)
 ```
 
@@ -470,7 +470,7 @@ Average percent cover by structure and functional group across your study area.
 
 ```{r SFG by plot , echo = FALSE , results = 'asis'}
 
-SummaryTables_WithAttributes(EcoSitePlots = TDat_LMF_Attributed, Species_plots_ecosite, SummaryVar = "GrowthHabitSub", 
+SummaryTables_WithAttributes(EcoSitePlots = TDat_LMF, Species_plots_ecosite, SummaryVar = "GrowthHabitSub", 
               SummarizeBy = "Plot", Attributed_Pks = Attributed_Pks) 
 
 ```
@@ -481,7 +481,7 @@ Average percent cover by structure and functional group across your study area.
 
 ```{r SFG , echo = FALSE , results = 'asis'}
 
-SummaryTables_WithAttributes(EcoSitePlots = TDat_LMF_Attributed, Species_plots_ecosite, SummaryVar = "GrowthHabitSub", 
+SummaryTables_WithAttributes(EcoSitePlots = TDat_LMF, Species_plots_ecosite, SummaryVar = "GrowthHabitSub", 
               SummarizeBy = "EcologicalSite", Attributed_Pks = Attributed_Pks)
                        
 ```
@@ -495,7 +495,7 @@ Percent cover by noxious versus non-noxious plants by plot within your atudy are
 
 ```{r noxious by plot , echo = FALSE , results = 'asis'}
 
-SummaryTables_WithAttributes(EcoSitePlots = TDat_LMF_Attributed, Species_plots_ecosite, SummaryVar = "Noxious", 
+SummaryTables_WithAttributes(EcoSitePlots = TDat_LMF, Species_plots_ecosite, SummaryVar = "Noxious", 
               SummarizeBy = "Plot", Attributed_Pks = Attributed_Pks)
 
 ```
@@ -506,7 +506,7 @@ Percent cover by noxious versus non-noxious plants averaged across your study ar
 
 ```{r noxious , echo = FALSE , results = 'asis'}
 
-SummaryTables_WithAttributes(EcoSitePlots = TDat_LMF_Attributed, Species_plots_ecosite, SummaryVar = "Noxious", 
+SummaryTables_WithAttributes(EcoSitePlots = TDat_LMF, Species_plots_ecosite, SummaryVar = "Noxious", 
               SummarizeBy = "EcologicalSite", Attributed_Pks = Attributed_Pks)
 
 ```
@@ -518,7 +518,7 @@ SummaryTables_WithAttributes(EcoSitePlots = TDat_LMF_Attributed, Species_plots_e
 
 ```{r woody by plot , echo = FALSE , results = 'asis'}
 
-SummaryTables_WithAttributes(EcoSitePlots = TDat_LMF_Attributed, Species_plots_ecosite, SummaryVar = "Woody", 
+SummaryTables_WithAttributes(EcoSitePlots = TDat_LMF, Species_plots_ecosite, SummaryVar = "Woody", 
               SummarizeBy = "Plot", Attributed_Pks = Attributed_Pks)
 
 ```
@@ -529,7 +529,7 @@ Percent cover by woody versus herbaceous plants averaged across your study area.
 
 ```{r woody , echo = FALSE , results = 'asis'}
 
-SummaryTables_WithAttributes(EcoSitePlots = TDat_LMF_Attributed, Species_plots_ecosite, SummaryVar = "Woody", 
+SummaryTables_WithAttributes(EcoSitePlots = TDat_LMF, Species_plots_ecosite, SummaryVar = "Woody", 
               SummarizeBy = "EcologicalSite", Attributed_Pks = Attributed_Pks)
 
 ```
@@ -546,7 +546,7 @@ This table contains species that were only ever detected in species richness inv
 
 ```{r trace species table by plot  , echo = FALSE , results = 'asis'}
 
-SummaryTables_WithAttributes(EcoSitePlots = TDat_LMF_Attributed, Species_plots_ecosite, SummaryVar = "TraceSpecies", 
+SummaryTables_WithAttributes(EcoSitePlots = TDat_LMF, Species_plots_ecosite, SummaryVar = "TraceSpecies", 
               SummarizeBy = "Plot", Attributed_Pks = Attributed_Pks) 
 
 ```
@@ -557,7 +557,7 @@ This table contains species that were only ever detected in species richness inv
 
 ```{r trace species table , echo = FALSE , results = 'asis'}
 
-SummaryTables_WithAttributes(EcoSitePlots = TDat_LMF_Attributed, Species_plots_ecosite, SummaryVar = "TraceSpecies", 
+SummaryTables_WithAttributes(EcoSitePlots = TDat_LMF, Species_plots_ecosite, SummaryVar = "TraceSpecies", 
               SummarizeBy = "EcologicalSite", Attributed_Pks = Attributed_Pks) 
 
 ```
@@ -603,7 +603,7 @@ Ground cover indicator values by plot within the specified ecological site.
 
 ```{r LPI ground cover table plot, echo = FALSE , results = 'asis'}
 
-SummaryTables_WithAttributes(EcoSitePlots = TDat_LMF_Attributed, Species_plots_ecosite, SummaryVar = "GroundCover", 
+SummaryTables_WithAttributes(EcoSitePlots = TDat_LMF, Species_plots_ecosite, SummaryVar = "GroundCover", 
               SummarizeBy = "Plot", Attributed_Pks = Attributed_Pks)
 
 ```
@@ -614,7 +614,7 @@ Ground cover values averaged across the specified ecological site.
  
 ```{r LPI ground cover table , echo = FALSE , results = 'asis'}
 
-SummaryTables_WithAttributes(EcoSitePlots = TDat_LMF_Attributed, Species_plots_ecosite, SummaryVar = "GroundCover", 
+SummaryTables_WithAttributes(EcoSitePlots = TDat_LMF, Species_plots_ecosite, SummaryVar = "GroundCover", 
               SummarizeBy = "EcologicalSite", Attributed_Pks = Attributed_Pks)
 
 ```
@@ -660,7 +660,7 @@ The table below shows gap size classes represented within each plot within the s
 
 ```{r Gap plot summary , echo = FALSE , include = TRUE}
 
-SummaryTables_WithAttributes(EcoSitePlots = TDat_LMF_Attributed, Species_plots_ecosite, SummaryVar = "Gap", 
+SummaryTables_WithAttributes(EcoSitePlots = TDat_LMF, Species_plots_ecosite, SummaryVar = "Gap", 
               SummarizeBy = "Plot", Attributed_Pks = Attributed_Pks)
 
 ```
@@ -671,7 +671,7 @@ Below is a summary of average percent cover within each gap size class across th
 
 ```{r Gap summary , echo = FALSE , include = TRUE}
 
-SummaryTables_WithAttributes(EcoSitePlots = TDat_LMF_Attributed, Species_plots_ecosite, SummaryVar = "Gap", 
+SummaryTables_WithAttributes(EcoSitePlots = TDat_LMF, Species_plots_ecosite, SummaryVar = "Gap", 
               SummarizeBy = "EcologicalSite", Attributed_Pks = Attributed_Pks)
   
 ```
@@ -714,7 +714,7 @@ Below are the soil stability ratings for each individual plot within the specifi
 
 ```{r soil stab table by plot , echo = FALSE , include = TRUE}
 
-SummaryTables_WithAttributes(EcoSitePlots = TDat_LMF_Attributed, Species_plots_ecosite, SummaryVar = "SoilStability", 
+SummaryTables_WithAttributes(EcoSitePlots = TDat_LMF, Species_plots_ecosite, SummaryVar = "SoilStability", 
               SummarizeBy = "Plot", Attributed_Pks = Attributed_Pks)
 
 ```
@@ -725,7 +725,7 @@ Below are the average soil stability ratings within the specified ecological sit
 
 ```{r soil stab table , echo = FALSE , include = TRUE}
 
-SummaryTables_WithAttributes(EcoSitePlots = TDat_LMF_Attributed, Species_plots_ecosite, SummaryVar = "SoilStability", 
+SummaryTables_WithAttributes(EcoSitePlots = TDat_LMF, Species_plots_ecosite, SummaryVar = "SoilStability", 
               SummarizeBy = "EcologicalSite", Attributed_Pks = Attributed_Pks)
 
 ```
@@ -789,7 +789,7 @@ Rows with lower p-values can help you focus on the differences which are stronge
 tests <- list()
 
 for(i in EcologicalSiteIds){
-  tests[[i]] <- t.tests(TDat_LMF_Attributed = TDat_LMF_Attributed,
+  tests[[i]] <- t.tests(TDat_LMF = TDat_LMF,
                         EcologicalSite = i,
                         alpha = 0.2)
 }

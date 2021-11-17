@@ -57,7 +57,7 @@ MakeMap <- function(EcologicalSiteId, TDat_LMF){
     
     return(Map)
     
-  } else{
+  } else {
     
     # Making Map without polygon
     Map <- leaflet::addTiles(Map) %>% leaflet::addCircleMarkers(lng = ~Longitude_NAD83 , lat = ~Latitude_NAD83 , radius = 3 ,

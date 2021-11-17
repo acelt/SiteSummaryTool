@@ -89,6 +89,8 @@
     # filter down to list of plots from look up table if grouping
     if(Groups){
       TDat_LMF <- TDat_LMF[TDat_LMF$PrimaryKey %in% groups$PrimaryKey,]
+      # remove erroneous levels from factor
+      TDat_LMF$EcologicalSiteId <- as.factor(as.character(TDat_LMF$EcologicalSiteId))
     }
     
     return(TDat_LMF)
