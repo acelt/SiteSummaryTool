@@ -66,7 +66,7 @@ MakeMap(EcologicalSiteId = EcologicalSiteId, TDat_LMF)
 
 ## Some metadata {.tabset .tabset-fade .tabset-pills}
 
-### Plots Per Time Period and Ecological Site in your Study Area(s) {.tabset .tabset-fade .tabset-pills}
+### Count of Plots in your Study Area(s) {.tabset .tabset-fade .tabset-pills}
 
 ```{r metadata plot list, echo = FALSE,}
 md_plotlist <- list()
@@ -87,14 +87,6 @@ for(i in EcologicalSiteIds){
   plot(md_plotlist[[i]])
   cat("  \n")
 }
-
-```
-
-## Plots Per Year in your Study Area(s)
-
-```{r plots figure 3 , echo = FALSE, fig.height = 3 , fig.width = 8, fig.cap = "AIM & LMF Plots Per Year in Piceance-East Douglas HMA"}
-
-PlotMetadata(dataframe = EcoSitePlots)
 
 ```
 
@@ -131,6 +123,7 @@ for(i in EcologicalSiteIds){
                                                        EcoSitePlots = TDat_LMF)
   }
 }
+
 ```
 
 ####

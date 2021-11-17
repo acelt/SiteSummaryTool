@@ -11,7 +11,7 @@ SummaryFigures_WithAttributes <- function(SpeciesList, Species_plots_ecosite, Ec
   Species_plots_ecosite_attributed <- merge(Species_plots_ecosite, Attributed_Pks, by = "PrimaryKey", all = TRUE) %>% 
     unique() 
   
-  # the input tdat_lmf attributed already has atribute heres, no need to merge
+  # the input tdat_lmf attributed already has attribute heres, no need to merge
   EcoSitePlots_Attributed <- EcoSitePlots[EcoSitePlots$EcologicalSiteId == EcologicalSite,]
   
   # Added in attribute title here instead of allotment name
