@@ -45,11 +45,6 @@ This report uses both boxplots and mean values with confidence intervals to summ
 
 ![ Intepretting a Box Plot. Modified from: https://www.wellbeingatschool.org.nz/information-sheet/understanding-and-interpreting-box-plots (accessed 22 Aug 2019)](boxplot_text.png)
 
-## Confidence Intervals
-
-![Intertpreting Confidence Intervals](CI_figure.png)
-
-For more information on interpreting confidence intervals see the presentation from Project Leads Training 2020 [PowerPoint here](https://doimspp.sharepoint.com/:p:/r/sites/ext-blm-oc-naim/Shared%20Documents/AIM%20Projects/General%20AIM%20Resources/Training%20Resources/AIM%20Project%20Leads%20Training/November%202020%20Session/Day%202%20Presentations/5.Having%20Confidence%20in%20Your%20Estimates_v2_2020.pptx?d=wc58434b1502f4d019eed04efb612b093&csf=1&web=1&e=9bb5jJ) and [presentation here](https://youtu.be/Gl9ippHC16A).
 
 # 3. Where are the data coming from? {.tabset .tabset-fade .tabset-pills}
 ##
@@ -377,19 +372,6 @@ for(i in EcologicalSiteIds){
 }
 ```
 
-## Confidence Interval Figures {.tabset .tabset-fade .tabset-pills}
-
-###
-```{r CI LPI ground plot static , echo = FALSE ,  fig.height = 10 , fig.width = 10 ,  results = 'asis', message=FALSE, include=TRUE}
-
-for(i in EcologicalSiteIds){
-  cat("  \n###", i, "  \n")
-  #print(CI_FigureList_stat[[i]][["GroundCover"]])
-  plot(CI_FigureList_stat[[i]][["GroundCover"]])
-  cat("  \n")
-}
-```
-##
 
 ## Summary Tables {.tabset .tabset-fade .tabset-pills}
 
@@ -435,19 +417,6 @@ for(i in EcologicalSiteIds){
 }
 ```
 
-## Confidence Interval Figure  {.tabset .tabset-fade .tabset-pills}
-###
-```{r CI Gap plot static , echo = FALSE , include = TRUE , fig.height = 16, fig.width= 10, results="asis"}
-
-for(i in EcologicalSiteIds){
-  cat("  \n###", i, "  \n")
-  #print(CI_FigureList_stat[[i]][["Gap"]])
-  plot(CI_FigureList_stat[[i]][["Gap"]])
-  cat("  \n")
-}
-
-```
-##
 
 ## Canopy Gap Size Class Summary Table {.tabset .tabset-fade .tabset-pills}
 ###
@@ -490,18 +459,6 @@ for(i in EcologicalSiteIds){
 
 ```
 
-## Confidence Interval Figure {.tabset .tabset-fade .tabset-pills}
-###
-```{r CI soil stab plot static , echo = FALSE , include = TRUE , fig.height = 8 , fig.width = 10, results="asis", message=FALSE}
-
-for(i in EcologicalSiteIds){
-  cat("  \n###", i, "  \n")
-  #print(CI_FigureList_stat[[i]][["SoilStability"]])
-  plot(CI_FigureList_stat[[i]][["SoilStability"]])
-  cat("  \n")
-}
-
-```
 
 ## Soil Stability Summary Table {.tabset .tabset-fade .tabset-pills}
 ###
@@ -527,83 +484,4 @@ SummaryTables_WithAttributes(EcoSitePlots = TDat_LMF, Species_plots_ecosite, Sum
 
 ```
 ##
-
-# 8. Remote Sensing Data
-
-## 
-
-## Rangeland Analysis Platform (RAP) estimates {.tabset .tabset-fade .tabset-pills}
-
-Remotely sensed estimates from the [RAP tool](https://rangelands.app)
-
-```{r, echo=FALSE}
-p <- Plot_RAP(filepath = "C:\\Users\\alaurencetraynor\\Documents\\2021\\Analysis\\CO\\WHFO\\HMA\\PED_HMA_RAP.csv")
-
-```
-
-###
-### Figure
-```{r, echo=FALSE, include=TRUE, fig.height = 8 , fig.width = 14}
-plotly::ggplotly(p)%>%
-layout(legend = list(orientation = "h",   # show entries horizontally
-                     xanchor = "center",  # use center of legend as anchor
-                     x = 0.5,
-                     y = -0.2))             # put legend in center of x-axis
-```
-
-### Summary Table
-```{r rap table , echo = FALSE , include = TRUE}
-Table_RAP(filepath = "C:\\Users\\alaurencetraynor\\Documents\\2021\\Analysis\\CO\\WHFO\\HMA\\PED_HMA_RAP.csv")
-
-rap_data <-  read.csv("C:\\Users\\alaurencetraynor\\Documents\\2021\\Analysis\\CO\\WHFO\\HMA\\PED_HMA_RAP.csv")
-
-mk_test <- apply(X = rap_data[,2:6],
-              MARGIN = 2,
-              FUN = function(x){
-                test <- Kendall::MannKendall(x)
-                return(test)
-                })
-  
-ss_test <- apply(X = rap_data[,2:6],
-              MARGIN = 2,
-              FUN = function(x){
-                test <- trend::sens.slope(x, conf.level = 0.8)
-                return(test)
-              })
-
-# library(gdalUtils)
-# gdalUtils::gdal_translate(of="GTiff", co="TILED=YES", src_dataset="/vsicurl/http://rangeland.ntsg.umt.edu/data/rap/rap-vegetation-cover/v2/vegetation-cover-v2-2019.tif", projwin=(c(-118.01, 43.42, -116.7, 42.8)), output_Raster=TRUE, dst_dataset="seOR2019-rap.tif")
-
-# senslope test? here
-```
-
-# 9. Summary Statistics
-
-Mean indicator values from 2011-2015 and 2016-2020 were compared using t-tests and Mann Whitney-U tests. These tests assume 
-Rows with lower p-values can help you focus on the differences which are strongest. Comparisons with a p-value of 0.2 or lower are significant at the 80% Confidence level. Blank p-values indicate rows where statistical comparisons were unable to be made due to sample size limitations.
-
-```{r,echo = FALSE , include = TRUE}
-tests <- list()
-
-for(i in EcologicalSiteIds){
-  tests[[i]] <- t.tests(TDat_LMF = TDat_LMF,
-                        EcologicalSite = i,
-                        alpha = 0.2)
-}
-
-```
-
-## Summary Table {.tabset .tabset-fade .tabset-pills}
-
-###
-```{r t test tables, echo = FALSE , include = TRUE, results="asis", message=FALSE}
-
-for(i in EcologicalSiteIds){
-  cat("  \n###", i, "  \n")
-  #print(tests[[i]])
-  print( htmltools::tagList(tests[[i]]))
-  cat("  \n")
-}
-
-```
 
