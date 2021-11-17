@@ -26,7 +26,7 @@ MakeMap <- function(EcologicalSiteId, TDat_LMF){
   if(IncludeShapefile) {
     # Reading in Group polygon
     projection <- sf::st_crs("+proj=longlat +datum=NAD83")
-    poly <- sf::st_read(dsn = Shapefile_Path, layer = Shapefile_Name)
+    poly <- sf::st_read(dsn = Shapefile_Path, layer = Shapefile_Name, quiet = TRUE)
     poly <- sf::st_transform(poly, crs = projection)
     poly <- methods::as(poly, "Spatial")
     

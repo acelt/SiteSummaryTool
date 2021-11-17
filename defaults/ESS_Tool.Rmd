@@ -138,7 +138,7 @@ for(i in EcologicalSiteIds){
 
 ```{r SFG plots forb static, fig.height = 5 , fig.width = 10 , echo = FALSE, include = TRUE, message=FALSE, results="asis"}
 
-EcologicalSiteIds_Forbs <- EcologicalSiteIds[1:5] # hard coding this for now, one ecosite doesn have forbs, need to add check for this
+EcologicalSiteIds_Forbs <- subset(EcologicalSiteIds, EcologicalSiteIds != "R042XA053NM") # hard coding this for now, one ecosite doesn have forbs, need to add check for this
 
 for(i in EcologicalSiteIds_Forbs){
   cat("  \n#####", i, "\n")
