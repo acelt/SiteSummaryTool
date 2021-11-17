@@ -60,7 +60,7 @@ Plots are colored by ecological site as well as year sampled. \
 
 ```{r map , echo = FALSE, include=TRUE, message=FALSE, warning = FALSE}
 
-MakeMap(EcologicalSiteId = unique(TDat_LMF_Attributed$EcologicalSiteId), TDat_LMF_Attributed)
+MakeMap(EcologicalSiteId = EcologicalSiteId, TDat_LMF)
 
 ```
 
