@@ -1,6 +1,7 @@
 SummaryTables_WithAttributes <- function(EcoSitePlots, Species_plots_ecosite, 
                           SummaryVar, SummarizeBy, Attributed_Pks){
 
+  
 #Prep
 SpeciesList <- SpeciesList %>% dplyr::select(Species, ScientificName, CommonName,
                                              Family, SpeciesState, 
@@ -71,7 +72,7 @@ if(SummaryVar == "Species" & SummarizeBy == "Plot"){
                             buttons =
                             list(list(extend = 'collection', buttons = c('csv', 'excel'),
                             text = 'Download Table'))) , 
-                  caption = (paste("Percent Cover by Species by Plot within " , toString(EcologicalSite))) , 
+                  caption = (paste("Percent Cover by Species by Plot within " , toString(Attribute_Field))) , 
                   rownames = FALSE)
 }
 
@@ -106,7 +107,7 @@ if(SummaryVar == "Species" & SummarizeBy == "EcologicalSite"){
                                                             extend = 'collection',
                                                             buttons = c('csv', 'excel'),
                                                             text = 'Download Table'))) , 
-                                                            caption = (paste("Average Percent Cover Values Across" , toString(EcologicalSite))) , 
+                                                            caption = (paste("Average Percent Cover Values Across" , toString(Attribute_Field))) , 
                                                             rownames = FALSE)
 }
 
@@ -128,7 +129,7 @@ if(SummaryVar== "GrowthHabitSub" & SummarizeBy == "Plot"){
                                buttons = c('csv', 'excel'),
                                text = 'Download Table'))) ,
                   caption = (paste("Percent Cover by Structure and Functional Group by Plot  within " , 
-                                   toString(EcologicalSite))), 
+                                   toString(Attribute_Field))), 
                   rownames = FALSE)
 }
 
@@ -153,7 +154,7 @@ if(SummaryVar == "GrowthHabitSub" & SummarizeBy == "EcologicalSite"){
                             buttons = c('csv', 'excel'),
                             text = 'Download Table'))) ,
                   caption = (paste("Percent Cover by Structure and Functional Group in " , 
-                                   toString(EcologicalSite))), 
+                                   toString(Attribute_Field))), 
                   rownames = FALSE)
     
 }
@@ -173,7 +174,7 @@ if(SummaryVar== "Noxious" & SummarizeBy == "Plot"){
                                  buttons = c('csv', 'excel'),
                                  text = 'Download Table'))) , 
                                  caption = (paste("Percent Cover Noxious Versus Non by Plot within " , 
-                                                  toString(EcologicalSite))) , 
+                                                  toString(Attribute_Field))) , 
                                  rownames = FALSE)
 }
 
@@ -204,7 +205,7 @@ if(SummaryVar== "Noxious" & SummarizeBy == "EcologicalSite"){
                              buttons = c('csv', 'excel'),
                              text = 'Download Table'))) , 
                    caption = (paste("Percent Cover Noxious Versus Non in " , 
-                                    toString(EcologicalSite))) , 
+                                    toString(Attribute_Field))) , 
                    rownames = FALSE)
   
 }
@@ -223,7 +224,7 @@ if(SummaryVar == "Woody" & SummarizeBy == "Plot"){
                                 extend = 'collection',
                                 buttons = c('csv', 'excel'),
                                 text = 'Download Table'))) , 
-                      caption = (paste("Percent Cover Woody vs. Non by Plot within: " , toString(EcologicalSite))) , 
+                      caption = (paste("Percent Cover Woody vs. Non by Plot within: " , toString(Attribute_Field))) , 
                       rownames = FALSE)
   
 }
@@ -250,7 +251,7 @@ if(SummaryVar == "Woody" & SummarizeBy == "EcologicalSite"){
                             buttons = c('csv', 'excel'),
                             text = 'Download Table'))) , 
                             caption = (paste("Percent Cover Woody vs. Non in: " , 
-                                             toString(EcologicalSite))) , 
+                                             toString(Attribute_Field))) , 
                                        rownames = FALSE)
     
 }
@@ -271,7 +272,7 @@ if(SummaryVar == "SageGrouseGroup" & SummarizeBy == "Plot"){
                               buttons = c('csv', 'excel'),
                               text = 'Download Table'))) , 
                   caption = (paste("Percent Cover by Sage-Grouse Group by Plot within: " , 
-                                   toString(EcologicalSite))), 
+                                   toString(Attribute_Field))), 
                   rownames = FALSE)
 }
 
@@ -295,7 +296,7 @@ if(SummaryVar == "SageGrouseGroup" & SummarizeBy == "EcologicalSite"){
                             buttons = c('csv', 'excel'),
                             text = 'Download Table'))) ,
                  caption = (paste("Percent Cover by Sage-Grouse Group in " , 
-                                  toString(EcologicalSite))) , 
+                                  toString(Attribute_Field))) , 
                  rownames = FALSE)
   
 }
@@ -319,7 +320,7 @@ if(SummaryVar == "PreferredForb" & SummarizeBy == "Plot"){
                           buttons = c('csv', 'excel'),
                           text = 'Download Table'))) , 
                   caption = (paste("Percent Cover by Preferred Forb By Plot within " , 
-                                   toString(EcologicalSite))) , 
+                                   toString(Attribute_Field))) , 
                   rownames = FALSE)
   
   
@@ -349,7 +350,7 @@ if(SummaryVar == "PreferredForb" & SummarizeBy == "EcologicalSite"){
                         buttons = c('csv', 'excel'),
                         text = 'Download Table'))) , 
                         caption = (paste("Percent Cover by Preferred Forb in " , 
-                                         toString(EcologicalSite))) , 
+                                         toString(Attribute_Field))) , 
                         rownames = FALSE)
   
 }
@@ -373,7 +374,7 @@ if(SummaryVar == "TraceSpecies" & SummarizeBy == "Plot"){
                          buttons = c('csv', 'excel'),
                          text = 'Download Table'))) , 
                          caption = (paste("Trace Species by Plot within " , 
-                                         toString(EcologicalSite))) , 
+                                         toString(Attribute_Field))) , 
                          rownames = FALSE)
   
 }
@@ -396,7 +397,7 @@ if(SummaryVar == "TraceSpecies" & SummarizeBy == "EcologicalSite"){
                                             buttons = c('csv', 'excel'),
                                             text = 'Download Table'))) , 
                                             caption = (paste("Trace species in " , 
-                                                       toString(EcologicalSite))) , 
+                                                       toString(Attribute_Field))) , 
                                                        rownames = FALSE)
   
    
@@ -422,7 +423,7 @@ if(SummaryVar == "GroundCover" & SummarizeBy == "Plot"){
                                    buttons = c('csv', 'excel'),
                                    text = 'Download Table'))) , 
                                    caption = (paste("Percent cover by plot within " , 
-                                                    toString(EcologicalSite))) , 
+                                                    toString(Attribute_Field))) , 
                                              rownames = FALSE)
 }
 
@@ -449,7 +450,7 @@ if(SummaryVar == "GroundCover" & SummarizeBy == "EcologicalSite"){
                                buttons = c('csv', 'excel'),
                                text = 'Download Table'))) , 
                         caption = (paste("Average percent cover in " , 
-                                         toString(EcologicalSite))) , 
+                                         toString(Attribute_Field))) , 
                         rownames = FALSE)
 }
 
@@ -475,7 +476,7 @@ if(SummaryVar == "Gap" & SummarizeBy == "Plot"){
                                            buttons = c('csv', 'excel'),
                                            text = 'Download Table'))) , 
                                            caption = (paste("Percent cover by canopy gap class by plot within " , 
-                                                           toString(EcologicalSite))) , 
+                                                           toString(Attribute_Field))) , 
                                            rownames = FALSE)
 }
 
@@ -504,7 +505,7 @@ if(SummaryVar == "Gap" & SummarizeBy == "EcologicalSite"){
                                           buttons = c('csv', 'excel'),
                                           text = 'Download Table'))) , 
                             caption = (paste("Percent cover by canopy gap class in: " , 
-                                             toString(EcologicalSite))) , 
+                                             toString(Attribute_Field))) , 
                                       rownames = FALSE)
   
 }
@@ -531,7 +532,7 @@ if(SummaryVar == "SoilStability" & SummarizeBy == "Plot"){
                                 buttons = c('csv', 'excel'),
                                 text = 'Download Table'))) , 
                         caption = (paste("Soil stability ratings by plot in: " , 
-                                         toString(EcologicalSite))) , 
+                                         toString(Attribute_Field))) , 
                                 rownames = FALSE)
 
 }
@@ -561,7 +562,7 @@ if(SummaryVar == "SoilStability" & SummarizeBy == "EcologicalSite"){
                                     buttons = c('csv', 'excel'),
                                     text = 'Download Table'))) , 
                            caption = (paste("Average soil stability ratings in: " , 
-                                            toString(EcologicalSite))) , 
+                                            toString(Attribute_Field))) , 
                            rownames = FALSE)
 
 }
