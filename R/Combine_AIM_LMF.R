@@ -1,17 +1,17 @@
 Combine_AIM_LMF <- function(TerrADat_Path, EDIT_List_Path, Internal){
  
    if(!Internal){
-  TerrADat <- sf::st_read(dsn = TerrADat_Path , layer = "TerrADat")
-  LMF <- sf::st_read(dsn = TerrADat_Path , layer = "LMF")
+  TerrADat <- sf::st_read(dsn = TerrADat_Path , layer = "TerrestrialIndicators")
   TerrADat <- as.data.frame(TerrADat)
   TerrADat <- dplyr::select(TerrADat, -Shape)
-  LMF <- as.data.frame(LMF)
-  LMF <- dplyr::select(LMF, -Shape)}
+}
   
   if(Internal){
   TerrADat <- TerrADat
-  LMF <- LMF
-   }
+  }
+  
+  TerrADat <- TerrADat[TerrADat$ProjectName != "LMF",]
+  LMF <- TerrADat[TerrADat$ProjectName == "LMF",]
   
   #Read in full csv of ecological site ids from EDIT
   
@@ -50,16 +50,7 @@ Combine_AIM_LMF <- function(TerrADat_Path, EDIT_List_Path, Internal){
   LMF_EcoSite <- dplyr::select(LMF_EcoSite, -EcoSiteId_Stripped)
   
   #Bind LMF and TerrADat
-  #Place NAs in non-matching columns
-  TerrADat[setdiff(names(LMF_EcoSite) , names(TerrADat))] <- NA
-  LMF_EcoSite[setdiff(names(TerrADat), names(LMF_EcoSite))] <- NA
-  
-  #Bind LMF and TerrADat
-  #Place NAs in non-matching columns
-  TerrADat[setdiff(names(LMF_EcoSite) , names(TerrADat))] <- NA
-  LMF_EcoSite[setdiff(names(TerrADat), names(LMF_EcoSite))] <- NA
-  
-  TDat_LMF <- rbind(TerrADat , LMF_EcoSite)
+  TDat_LMF <- rbind(TerrADat, LMF_EcoSite)
   
   #Pull out year for futur
   TDat_LMF$DateVisited <- sub("^(\\d{4}).*$", "\\1", TDat_LMF$DateVisited)
@@ -70,8 +61,6 @@ Combine_AIM_LMF <- function(TerrADat_Path, EDIT_List_Path, Internal){
   #Get with full esd names
   
   output <- merge(TDat_LMF , EDIT_rename , by = "EcologicalSiteId", all = TRUE)
-  
-
   
   output <- output %>% dplyr::select(-EcoSiteId_Stripped)
   

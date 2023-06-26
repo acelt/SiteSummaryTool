@@ -73,7 +73,7 @@ if(Interactive){
                                            axis.line.y = element_blank()) + theme(panel.grid.major.y = element_blank() ,
                                                                                   axis.title.y = element_blank()) +
                                      ggtitle(paste0("Percent Cover by Functional Group: " , 
-                                                    Species_plots_ecosite$GrowthHabitSub,
+                                                    unique(Species_plots_ecosite$GrowthHabitSub), 
                                                     toString(EcologicalSiteId), sep = " ")) +
                                      coord_flip() + facet_grid(cols = vars(GrowthHabitSub) ,
                                                                rows = vars(Duration) ,
