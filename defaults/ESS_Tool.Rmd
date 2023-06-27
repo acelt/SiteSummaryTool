@@ -113,7 +113,7 @@ WorkingFolder <- "C:\\Users\\alaurencetraynor\\Documents\\Tools\\Shiny App\\Site
 State <- "NM"
 
 #Set your full EcologicalSiteId, or a string of EcologicalSiteIds if you are grouping
-EcologicalSiteId <- "R042XB019NM"
+EcologicalSiteId <- "R042XB006NM"
 
 ```
 
@@ -579,100 +579,6 @@ Species_Plots_Static[["Succulent.Perennial"]]
 ```
 </div>
 
-
-### Sage-Grouse Indicators {.tabset .tabset-fade .tabset-pills}
-
-#### By Sage-Grouse Group  {.tabset .tabset-fade .tabset-pills}
-
-#####
-##### Interactive
-
-*Note that sage-grouse groups may not be attributed for every state. Consult with your project lead before using these values in reporting.*
-
-<div class = "ScrollStyle">
-
-```{r sggroup interactive , fig.height = 10 , fig.width = 10 , echo = FALSE, include = TRUE , results = 'asis'}
-
-
-ggplotly(SageGrouseSummaries(EcoSitePlots, Species_plots_ecosite, 
-                              SummaryVar = "SageGrouseGroup", 
-                              Interactive = TRUE), tooltip = "text")
-
-
-```
-</div>
-
-##### Static
-
-*Note that these groups may not be attributed for every state. Consult with your project lead before using these values in reporting.*
-
-
-<div class = "ScrollStyle">
-
-```{r sggroup static , fig.height = 10 , fig.width = 10 , echo = FALSE, include = TRUE , results = 'asis'}
-
-SageGrouseSummaries(EcoSitePlots, Species_plots_ecosite, 
-                    SummaryVar = "SageGrouseGroup", Interactive = FALSE)
-
-```
-
-</div>
-
-
-#### Preferred Forbs  {.tabset .tabset-fade .tabset-pills}
-
-#####
-##### Interactive
-
-<div class = "ScrollStyle">
-
-```{r pref forb interactive , fig.height = 10 , fig.width = 10 , echo = FALSE, include = TRUE , results = 'asis'}
-
-ggplotly(SageGrouseSummaries(EcoSitePlots, Species_plots_ecosite, 
-                    SummaryVar = "PreferredForb", Interactive = TRUE), tooltip = "text")
-
-```
-</div>
-
-##### Static
-
-<div class = "ScrollStyle">
-```{r pref forb static, fig.height = 10 , fig.width = 10 , echo = FALSE, include = TRUE , results = 'asis'}
-
-SageGrouseSummaries(EcoSitePlots, Species_plots_ecosite, 
-                    SummaryVar = "PreferredForb", Interactive = FALSE)
-
-```
-
-</div>
-
-#### Sagebrush  {.tabset .tabset-fade .tabset-pills}
-
-#####
-##### Interactive
-
-<div class = "ScrollStyle">
-
-```{r sagebrush interactive , fig.height = 10 , fig.width = 10 , echo = FALSE, include = TRUE , results = 'asis'}
-
-ggplotly(SageGrouseSummaries(EcoSitePlots, Species_plots_ecosite, 
-                    SummaryVar = "Sagebrush", Interactive = TRUE), tooltip = "text")
-
-```
-</div>
-
-##### Static
-
-<div class = "ScrollStyle">
-
-```{r pref sagebrush static, fig.height = 10 , fig.width = 10 , echo = FALSE, include = TRUE , results = 'asis'}
-
-SageGrouseSummaries(EcoSitePlots, Species_plots_ecosite, 
-                    SummaryVar = "Sagebrush", Interactive = FALSE)
-
-```
-
-</div>
 
 ## Summary Tables {.tabset .tabset-fade .tabset-pills}
 
