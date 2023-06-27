@@ -77,7 +77,24 @@ Give the object "EcologicalSiteId" as Ecological Site Id in the section below:
 #You must define this and run these commands everytime you restart R.
 LibraryPath <- "C:/R/R-4.2.1/library"
 .libPaths(LibraryPath)
+#devtools::install_github(repo = "https://github.com/acelt/SiteSummaryTool.git", ref = "dev")
+
 library(SiteSummaryTool)
+
+#Load required packages
+require(devtools)
+require(tidyverse)
+require(knitr)
+require(DT)
+require(leaflet)
+require(RODBC)
+require(sf)
+require(rworldmap)
+require(rworldxtra)
+require(plotly)
+require(htmltools)
+require(ggplot2)
+require(glue)
 
 # If you are a BLM employee, set BLM <- TRUE
 # If you are an external data sharing partner, set BLM <- FALSE
@@ -104,7 +121,7 @@ EcologicalSiteId <- "R042XB019NM"
 
 The rest of the report is automated and requires no edits. 
 Click the Knit button at the top of your RStudio session and knit to an HTML. The output HTML document will be saved in the repository folder. View the document in Google Chrome or Firefox (*some features will be disabled in Internet Explorer*). You need to be connected to the internet to run the report, but you can view it without internet (*note that the basemap feature will be disabled offline*).
-```{r}
+```{r setting parameters}
 #Set the path to TerrADat (this will be NULL if working within BLM network)
 #If working within BLM network, TerrADat_Path = NULL (this tool will direct to AIMPub)
 #BLM <- TRUE if internal (on VPN). BLM <- FALSE if external
@@ -119,17 +136,15 @@ if(BLM){
 TerrADat_Path <- NULL
 conn <- RODBC::odbcConnect("AIMPub",rows_at_time = 1)
 
-TerrADat <- RODBC::sqlQuery(conn, 'SELECT * FROM ilmocAIMTerrestrialPub.ilmocAIMPubDBO.TerrestrialIndicators_evw;')
+TerrADat <- RODBC::sqlQuery(conn, 'SELECT * FROM ilmocAIMTerrestrialPub.ilmocAIMPubDBO.TerrestrialIndicators;')
 
 Species_Indicator <- RODBC::sqlQuery(conn, 'SELECT * FROM ilmocAIMTerrestrialPub.ilmocAIMPubDBO.TerrestrialSpecies;')
 
-SpeciesList <- RODBC::sqlQuery(conn, 'SELECT * FROM ilmocAIMTerrestrialPub.ILMOCAIMPUBDBO.tblStateSpecies_evw;')
+SpeciesList <- RODBC::sqlQuery(conn, 'SELECT * FROM ilmocAIMTerrestrialPub.ILMOCAIMPUBDBO.tblStateSpecies;')
 }
 ```
 
 ``` {r ESS Demo, echo = FALSE, include = FALSE}
-#Load required packages
-#InstallPackages(LibraryPath = LibraryPath)
 
 ```
 

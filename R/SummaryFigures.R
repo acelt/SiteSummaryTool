@@ -101,7 +101,7 @@ if(!Interactive){
                                        axis.line.y = element_blank()) + theme(panel.grid.major.y = element_blank() ,
                                                                               axis.title.y = element_blank()) +
                                  ggtitle(paste("Percent Cover by Functional Group:", 
-                                               Species_plots_ecosite$GrowthHabitSub,
+                                               unique(Species_plots_ecosite$GrowthHabitSub),
                                                toString(EcologicalSiteId), sep = " ")) +
                                  coord_flip() + facet_grid(cols = vars(GrowthHabitSub) ,
                                                            rows = vars(Duration) , switch = "y" ,
@@ -182,8 +182,8 @@ if(SummaryVar == "Species"){
                                          theme_light() +
                                          labs(y = "Percent Cover") + 
                                          ggtitle(paste("Percent Cover by Species, " , 
-                                                       PercentCover$GrowthHabitSub, 
-                                                       PercentCover$Duration ,
+                                                       unique(PercentCover$GrowthHabitSub), 
+                                                       unique(PercentCover$Duration) ,
                                                        toString(EcologicalSiteId))) + 
                                          theme(axis.title.y = element_blank() ,
                                                axis.text.y = element_blank(),
@@ -209,8 +209,8 @@ if(SummaryVar == "Species"){
                                        theme_light() +
                                        labs(y = "Percent Cover") + 
                                        ggtitle(paste("Percent Cover by Species, " , 
-                                                     PercentCover$GrowthHabitSub , 
-                                                     PercentCover$Duration , 
+                                                     unique(PercentCover$GrowthHabitSub) , 
+                                                     unique(PercentCover$Duration), 
                                                      toString(EcologicalSiteId))) + 
                                        theme(axis.title.y = element_blank()) +
                                        coord_flip() +  facet_grid(cols = vars(GrowthHabitSub) , rows = vars(Duration) ,
